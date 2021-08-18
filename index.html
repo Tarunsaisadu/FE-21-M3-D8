@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
+      integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l"
+      crossorigin="anonymous"
+    />
+
+    <title>Document</title>
+  </head>
+  <body>
+    <div class="container">
+      <div class="row mt-3">
+        <div class="col-md-6">
+          <h2>ADD NEW PRODUCT</h2>
+          <form class="add-product-form">
+            <div class="form-group">
+              <label for="title"> Name</label>
+              <input type="text" class="form-control" id="title-value" />
+            </div>
+            <div class="form-group">
+              <label for="body"> Brand</label>
+              <input type="text" class="form-control" id="title-value" />
+            </div>
+            <div class="form-group col-md-2">
+              <label for="price">price</label>
+              <input type="text" class="form-control" id="inputprice" />
+            </div>
+            <button type="submit" class="btn btn-primary">Add product</button>
+          </form>
+        </div>
+      </div>
+      <div class="product-list row">
+        <div class="card" mt-4 col-md-2 bg-light>
+          <img src="..." class="card-img-top" alt="..." />
+          <div class="card-body">
+            <h4>some product</h4>
+            <h5>barnd</h5>
+            <h6>price</h6>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script src="app.js"></script>
+  </body>
+</html>
