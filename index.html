@@ -49,7 +49,8 @@
     <div class="container">
       <div class="row justify-content-center">
         <div class="col-md-6">
-          <ul class="list-group list-group-flush" id="currentevents"></ul>
+          <h2 class="mt-5 mb-3">added products</h2>
+          <ul id="currentItems"></ul>
         </div>
       </div>
     </div>
@@ -66,37 +67,59 @@
     ></script>
 
     <script>
-      const handleSubmit = async (event) => {
-        event.preventDefault();
-
-        let url = "https://striveschool-api.herokuapp.com/api/product/";
-
-        const product = {
-          name: document.querySelector("#productname"),
-          description: document.querySelector("#description"),
-          brand: document.querySelector("#brand"),
-          Imageurl: document.querySelector("#imageurl"),
-          price: document.querySelector("#price"),
-        };
-
-        const getdata = async () => {
+      const getData = async (url) => {
+        try {
           const response = await fetch(url, {
-            method: "POST",
-            body: JSON.stringify(getdata),
+            method: "GET",
+
             headers: {
-              "Content-Type": "application/json",
               Authorization:
                 "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MTFjZjk1NjJkNTI2MjAwMTViNmRjOWMiLCJpYXQiOjE2MjkzMTY3NzksImV4cCI6MTYzMDUyNjM3OX0.nh7cYR58gUTmOQ3E-daha0Guo71iIHkr_nTXjcJc_-A",
+
+              "Content-Type": "application/json",
             },
           });
 
-          if (response.ok) {
-            const events = await response.json();
-          }
-        };
-        window.onload = async () => {
-          console.log(await getdata());
-        };
+          // if (!response.ok) { throw new Error("there was an issue with the fetch") }
+
+          const items = await response.json();
+
+          return items;
+        } catch (err) {
+          console.log("this error was handled", err);
+        } finally {
+          console.log("I'm the last thing");
+        }
+      };
+      const displayProducts = (items) => {
+        // DOM MANIPULATION
+
+        const ul = document.getElementById("currentItems");
+
+        if (items) {
+          items.forEach((item) => {
+            const li = document.createElement("li");
+
+            li.classList.add(
+              "list-group-item",
+              "d-flex",
+              "justify-content-between"
+            );
+            li.innerHTML = `<span>${item.name}</span><span class="badge badge-dark d-flex align-items-center ml-aiuto mr-2">${item.price}€</span><span>${item.imageUrl}</span><span>${item.description}</span><a href ="./details.html?id=${item._id}"> see more</a>`;
+
+            ul.appendChild(li);
+          });
+        }
+      };
+
+      window.onload = async () => {
+        const url = "https://striveschool-api.herokuapp.com/api/product/";
+
+        const events = await getData(url);
+
+        displayProducts(events);
+
+        console.log(events);
       };
     </script>
   </body>
